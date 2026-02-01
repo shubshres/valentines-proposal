@@ -335,3 +335,70 @@ p {
         transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.3);
     }
 }
+
+/* ---------------------------
+   Mobile 
+---------------------------- */
+@media (max-width: 480px) {
+    .wrap {
+        width: 100%;
+        padding: 18px;
+        /* more breathing room from screen edges */
+    }
+
+    .card {
+        padding: 22px 16px;
+        /* reduce padding so content fits */
+        gap: 14px;
+        border-radius: 18px;
+        /* slightly tighter radius on small screens */
+    }
+
+    h1 {
+        font-size: clamp(26px, 7vw, 34px);
+        line-height: 1.1;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .big-heart {
+        width: 64px;
+        height: 64px;
+    }
+
+    .big-heart::before,
+    .big-heart::after {
+        width: 64px;
+        height: 64px;
+    }
+
+    .big-heart::before {
+        left: -32px;
+    }
+
+    .big-heart::after {
+        top: -32px;
+    }
+
+    /* IMPORTANT: undo absolute button positioning on mobile */
+    .buttons {
+        min-height: unset;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 320px;
+        /* keeps it nice on slightly larger phones */
+        padding: 14px 16px;
+    }
+
+    .btn-yes,
+    .btn-no {
+        position: static;
+        left: auto;
+        transform: none;
+    }
+}
