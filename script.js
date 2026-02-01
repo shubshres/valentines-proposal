@@ -36,6 +36,35 @@ function makeSparks(x, y, n = 22) {
     }
 }
 
+function launchFirework() {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight * 0.7; // Keep in upper 70% of screen
+    
+    const colors = ['#ff4d8d', '#ff7ab2', '#3cffb5', '#ffd93d', '#ff6b9d', '#a78bfa'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    
+    // Create burst of particles
+    const particleCount = 25 + Math.floor(Math.random() * 15);
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement("div");
+        particle.className = "firework-particle";
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.background = color;
+        
+        const angle = (Math.PI * 2 * i) / particleCount;
+        const velocity = 100 + Math.random() * 100;
+        const dx = Math.cos(angle) * velocity;
+        const dy = Math.sin(angle) * velocity;
+        
+        particle.style.setProperty("--dx", `${dx}px`);
+        particle.style.setProperty("--dy", `${dy}px`);
+        
+        sparklesEl.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
+    }
+}
+
 function celebrateYes() {
     toast.style.display = "block";
 
@@ -45,7 +74,7 @@ function celebrateYes() {
     yesBtn.textContent = "YAY!!! 💖";
     noBtn.textContent = "Okay okay 😅";
 
-    // Reset dodge styling so it sits nicely after “Yes”
+    // Reset dodge styling so it sits nicely after "Yes"
     noBtn.style.position = "static";
     noBtn.style.left = "";
     noBtn.style.top = "";
@@ -53,6 +82,18 @@ function celebrateYes() {
     // Hide the entire buttons container
     const buttonsContainer = document.querySelector(".buttons");
     buttonsContainer.style.display = "none";
+    
+    // Launch fireworks!
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => launchFirework(), i * 200);
+    }
+    
+    // Continue launching fireworks for a minute
+    const fireworkInterval = setInterval(() => {
+        launchFirework();
+    }, 400);
+    
+    setTimeout(() => clearInterval(fireworkInterval), 60000);
 }
 
 function dodgeNo() {

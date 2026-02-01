@@ -296,3 +296,30 @@ p {
             translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1) rotate(180deg);
     }
 }
+
+/* Fireworks */
+.firework-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: firework 1.5s ease-out forwards;
+    box-shadow: 0 0 6px currentColor;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes firework {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    50% {
+        opacity: 1;
+    }
+    
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.3);
+    }
+}
