@@ -4,8 +4,9 @@
     --card: #141428cc;
     --text: #f7f4ff;
     --muted: #c9c2dd;
-    --red2: #ff006f;
-    --red: rgb(214, 1, 1);
+    --pink: #ff1744;
+    --pink2: #ff5252;
+    --green: #3cffb5;
     --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
     --radius: 22px;
 }
@@ -25,8 +26,8 @@ body {
         "Apple Color Emoji", "Segoe UI Emoji";
     color: var(--text);
     background:
-        radial-gradient(1200px 700px at 20% 20%, rgba(255, 77, 141, 0.18), transparent 60%),
-        radial-gradient(900px 600px at 80% 30%, rgba(60, 255, 181, 0.12), transparent 55%),
+        radial-gradient(1200px 700px at 20% 20%, rgba(255, 23, 68, 0.18), transparent 60%),
+        radial-gradient(900px 600px at 80% 30%, rgba(255, 82, 82, 0.12), transparent 55%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
     display: grid;
     place-items: center;
@@ -46,7 +47,7 @@ body {
     position: absolute;
     width: 14px;
     height: 14px;
-    background: linear-gradient(135deg, var(--red), var(--red2));
+    background: linear-gradient(135deg, var(--pink), var(--pink2));
     transform: rotate(45deg);
     border-radius: 3px;
     animation: floatUp linear infinite;
@@ -97,11 +98,16 @@ body {
 }
 
 .card {
-    background: var(--card);
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: linear-gradient(
+        135deg,
+        rgba(67, 67, 67, 0.4) 0%,
+        rgba(55, 55, 55, 0.3) 100%
+    );
+    border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     padding: 30px;
     display: grid;
     gap: 18px;
@@ -117,8 +123,8 @@ body {
     width: fit-content;
     margin-inline: auto;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 23, 68, 0.20);
+    background: rgba(255, 82, 82, 0.15);
     color: var(--muted);
     font-size: 14px;
     letter-spacing: 0.2px;
@@ -128,8 +134,8 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #fff, var(--red));
-    box-shadow: 0 0 24px rgba(255, 77, 141, 0.6);
+    background: radial-gradient(circle at 30% 30%, #fff, var(--pink));
+    box-shadow: 0 0 24px rgba(255, 23, 68, 0.6);
 }
 
 h1 {
@@ -150,12 +156,12 @@ p {
     width: 78px;
     height: 78px;
     margin: 8px auto 0;
-    background: linear-gradient(135deg, var(--red), var(--red2));
+    background: linear-gradient(135deg, var(--pink), var(--pink2));
     transform: rotate(45deg);
     border-radius: 14px;
     position: relative;
     animation: pulse 1.35s ease-in-out infinite;
-    box-shadow: 0 18px 50px rgba(255, 77, 141, 0.22);
+    box-shadow: 0 18px 50px rgba(255, 23, 68, 0.35);
 }
 
 .big-heart::before,
@@ -199,6 +205,7 @@ p {
     margin-top: 10px;
     position: relative;
     min-height: 54px;
+    width: 100%;
 }
 
 .btn {
@@ -215,25 +222,30 @@ p {
 }
 
 .btn-yes {
-    background: linear-gradient(135deg, var(--red), var(--red2));
-    color: #120814;
-    box-shadow: 0 14px 30px rgba(255, 77, 141, 0.25);
+    background: linear-gradient(135deg, var(--pink), var(--pink2));
+    color: #ffffff;
+    box-shadow: 0 14px 30px rgba(255, 23, 68, 0.35);
+    position: absolute;
+    left: 50%;
+    transform: translateX(calc(-100% - 6px));
 }
 
 .btn-yes:hover {
-    transform: translateY(-1px) scale(1.02);
+    transform: translateX(calc(-100% - 6px)) translateY(-1px) scale(1.02);
 }
 
 .btn-yes:active {
-    transform: translateY(0) scale(0.99);
+    transform: translateX(calc(-100% - 6px)) translateY(0) scale(0.99);
 }
 
 .btn-no {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.12);
     color: var(--text);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
-    position: relative;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    position: absolute;
+    left: 50%;
+    transform: translateX(6px);
 }
 
 /* Toast */
@@ -242,9 +254,9 @@ p {
     margin-top: 14px;
     padding: 14px 16px;
     border-radius: 16px;
-    background: rgba(60, 255, 181, 0.10);
-    border: 1px solid rgba(60, 255, 181, 0.25);
-    color: #dffdf1;
+    background: rgba(255, 60, 60, 0.15);
+    border: 1px solid rgba(255, 60, 60, 0.35);
+    color: #d7d7d7;
 }
 
 .toast-title {
@@ -253,13 +265,13 @@ p {
 }
 
 .toast strong {
-    color: var(--red);
+    color: var(--pink);
 }
 
 .footer {
     margin-top: 6px;
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(0, 0, 0, 0.45);
 }
 
 /* Sparkles */

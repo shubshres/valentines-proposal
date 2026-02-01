@@ -100,18 +100,39 @@ function dodgeNo() {
     const parent = document.querySelector(".buttons");
     const pRect = parent.getBoundingClientRect();
     const bRect = noBtn.getBoundingClientRect();
-
-    parent.style.position = "relative";
-    noBtn.style.position = "absolute";
+    const yesRect = yesBtn.getBoundingClientRect();
 
     const maxX = Math.max(0, pRect.width - bRect.width);
     const maxY = Math.max(0, pRect.height - bRect.height);
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    let x, y, attempts = 0;
+    const minDistance = 20; // Minimum pixels between buttons
+    
+    // Try to find a position that doesn't overlap with Yes button
+    do {
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
+        
+        // Calculate absolute position of No button
+        const noLeft = pRect.left + x;
+        const noRight = noLeft + bRect.width;
+        const noTop = pRect.top + y;
+        const noBottom = noTop + bRect.height;
+        
+        // Check if there's enough distance from Yes button
+        const hasHorizontalGap = noRight + minDistance < yesRect.left || noLeft > yesRect.right + minDistance;
+        const hasVerticalGap = noBottom + minDistance < yesRect.top || noTop > yesRect.bottom + minDistance;
+        
+        if (hasHorizontalGap || hasVerticalGap) {
+            break;
+        }
+        
+        attempts++;
+    } while (attempts < 50);
 
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
+    noBtn.style.transform = "none";
 
     makeSparks(
         pRect.left + x + bRect.width / 2,
