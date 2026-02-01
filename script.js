@@ -48,10 +48,12 @@ function celebrateYes() {
     // Reset dodge styling so it sits nicely after “Yes”
     noBtn.style.position = "static";
     noBtn.style.left = "";
-    noBtn.style.top = "";    
-    // Hide buttons
-    yesBtn.style.display = "none";
-    noBtn.style.display = "none";}
+    noBtn.style.top = "";
+    
+    // Hide the entire buttons container
+    const buttonsContainer = document.querySelector(".buttons");
+    buttonsContainer.style.display = "none";
+}
 
 function dodgeNo() {
     const parent = document.querySelector(".buttons");
